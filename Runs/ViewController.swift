@@ -200,7 +200,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			self?.tableview.reloadData()
 		}
 	}
-
+	
 	func stopTimer() {
 		timer?.invalidate()
 	}
@@ -212,33 +212,39 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RunCell
 		cell.title?.text = days[indexPath.row]
-		let shortFormatter = DateFormatter()
 		let now = Date()
+		let shortFormatter = DateFormatter()
 		shortFormatter.dateStyle = .short
 		let dueOn = Calendar.current.date(byAdding: .day, value: indexPath.row, to: start)!
 		let inDays = Calendar.current.dateComponents([.day], from: now, to: dueOn).day!
 		if (dueOn > now) {
-			cell.check.alpha = 0;
+			cell.check.alpha = 0
+			cell.due.alpha = 1
+			cell.title.alpha = 1
 			switch (inDays) {
 			case 0:
-				cell.due.text = "Today";
+				cell.due.text = "Today"
 				break;
 			case 1:
-				cell.due.text = "Tomorrow";
+				cell.due.text = "Tomorrow"
 				break;
 			default:
-				cell.due.text = "In \(inDays) days on \(shortFormatter.string(from: dueOn))";
+				let dayFormatter = DateFormatter()
+				dayFormatter.dateFormat = "EEEE"
+				cell.due.text = "in \(inDays) days on \(dayFormatter.string(from: dueOn).capitalized) \(shortFormatter.string(from: dueOn))"
 				break;
 			}
 		}
 		else {
-			cell.check.alpha = 1;
+			cell.check.alpha = 1
+			cell.due.alpha = 0.4
+			cell.title.alpha = 0.4
 			switch (inDays) {
 			case 0:
-				cell.due.text = "Yesterday";
+				cell.due.text = "Yesterday"
 				break;
 			default:
-				cell.due.text = "On \(shortFormatter.string(from: dueOn))"
+				cell.due.text = "on \(shortFormatter.string(from: dueOn))"
 				break;
 			}
 		}
