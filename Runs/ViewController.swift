@@ -12,8 +12,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	@IBOutlet weak var tableview: UITableView!
 	
 	weak var timer: Timer?
-	private let persistentContainer = NSPersistentContainer(name: "Days")
-	private let start = Date(timeIntervalSince1970: 1602216000.000)
+	private let persistentContainer = NSPersistentCloudKitContainer(name: "Days")
+    private let start = Date.from(year: 2021, month: 9, day: 10)
 	private let days = [
 		"6 Miles Easy",
 		"6 Miles Easy",
@@ -155,12 +155,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		
 		tableview.delegate = self
 		tableview.dataSource = self
-		
-		let now = Date()
-		let onDay = Calendar.current.dateComponents([.day], from: start, to: now).day! - 3
-		if (onDay > 0) {
-			tableview.scrollToRow(at: IndexPath(row:onDay,section: 0), at: UITableView.ScrollPosition.top, animated: false)
-		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -174,6 +168,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 											   name:UIApplication.willResignActiveNotification,
 											   object: nil)
 		startTimer()
+        
+        let now = Date()
+        let onDay = Calendar.current.dateComponents([.day], from: start, to: now).day! - 3
+        if (onDay > 0 && onDay < days.count) {
+            tableview.scrollToRow(at: IndexPath(row:onDay,section: 0), at: UITableView.ScrollPosition.top, animated: false)
+        }
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -252,3 +252,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	}
 }
 
+extension Date {
+
+    /// Create a date from specified parameters
+    ///
+    /// - Parameters:
+    ///   - year: The desired year
+    ///   - month: The desired month
+    ///   - day: The desired day
+    /// - Returns: A `Date` object
+    static func from(year: Int, month: Int, day: Int) -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        dateComponents.hour = 23
+        dateComponents.minute = 59
+        return calendar.date(from: dateComponents)!
+    }
+}

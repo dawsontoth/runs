@@ -26,6 +26,7 @@
 		A02C6D05252C184800827B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A02C6D0C252C188900827B6D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02C6D10252C225100827B6D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		A0E5317C26EA967100D56CDF /* Runs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runs.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 		A02C6CF3252C184800827B6D /* Runs */ = {
 			isa = PBXGroup;
 			children = (
+				A0E5317C26EA967100D56CDF /* Runs.entitlements */,
 				A02C6CF4252C184800827B6D /* AppDelegate.swift */,
 				A02C6CF6252C184800827B6D /* SceneDelegate.swift */,
 				A02C6CF8252C184800827B6D /* ViewController.swift */,
@@ -282,6 +284,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Runs/Runs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4979PWC2QY;
 				INFOPLIST_FILE = Runs/Info.plist;
@@ -291,8 +294,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dawson.health.Runs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -301,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Runs/Runs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4979PWC2QY;
 				INFOPLIST_FILE = Runs/Info.plist;
@@ -310,8 +315,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dawson.health.Runs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
